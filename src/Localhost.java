@@ -11,7 +11,7 @@ public class Localhost {
     public Localhost () {
         try {
             this.localhost = InetAddress.getLocalHost();
-            this.nInterface = NetworkInterface.getByInetAddress(localhost);
+            this.nInterface = NetworkInterface.getByInetAddress(this.localhost);
         }
         catch (Exception e) {
             System.err.println(e.getMessage());
@@ -24,9 +24,9 @@ public class Localhost {
 
     public int[] getIpAddress() {
         Pattern pattern = Pattern.compile("([0-9]{1,3}\\.)[0-9]");
-        if (pattern.matcher(localhost.getHostName()).find())
+        if (pattern.matcher(this.localhost.getHostName()).find())
             throw new UnknownInterfaceException();
-        String[] split = localhost.getHostAddress().split("\\.");
+        String[] split = this.localhost.getHostAddress().split("\\.");
         int[] result = new int[4];
         for (int i = 0; i < 4; i++) {
             result[i] = Integer.parseInt(split[i]);
