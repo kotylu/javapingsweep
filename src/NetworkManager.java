@@ -1,13 +1,16 @@
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 import java.util.ArrayList;
+import java.util.concurrent.CompletableFuture;
 
 
 public class NetworkManager {
     private final String networkAddress;
     private final int prefix;
+    private final ArrayList<String> possibilities;
 
     public NetworkManager(int[] localhost, int prefix) {
+        this.possibilities = new ArrayList<>();
         this.prefix = prefix;
         String binary = String.join("", toBinaryOktet(localhost[0]),
                                                 toBinaryOktet(localhost[1]),
@@ -18,23 +21,47 @@ public class NetworkManager {
 
     public ArrayList<String> pingSweep(IPing cmdPing) {
         ArrayList<String> result = new ArrayList<>();
-        char[] base = this.networkAddress.toCharArray();
+        CompletableFuture<Void> cf = new CompletableFuture<>();
+        this.genBinaryOptions(32-this.prefix, new int[32-this.prefix], 0);
 
-        //TODO algorithm: calculate all ips
-        this.validate(cmdPing, result, base);
+        //TODO status bar
+        //TODO make it run async without getting my mac into space
+        int i = 1;
+        for (String item : this.possibilities) {
+            int info = i;
+//                cf = CompletableFuture.runAsync(() -> {
+                    this.validate(cmdPing, result, String.format("%s%s", this.networkAddress.substring(0, this.prefix), item).toCharArray(), info);
+//                });
+            i++;
+        }
 
-        return result;
+//        while (!CompletableFuture.allOf(cf).isDone()) {
+//        }
+            return result;
     }
 
-    private void validate(IPing cmdPing, ArrayList<String> data, char[] value) {
-        System.out.println(StringUtils.join(ArrayUtils.toObject(value), ""));
-        System.out.println(this.getFromBinary(StringUtils.join(ArrayUtils.toObject(value), "")));
+    private void validate(IPing cmdPing, ArrayList<String> data, char[] value, int step) {
+        //TODO debugger: be able to see all of them - System.out.println(StringUtils.join(ArrayUtils.toObject(value), ""));
+//        System.out.println(this.getFromBinary(StringUtils.join(ArrayUtils.toObject(value), "")));
 
+        System.out.printf("%g%s%n",(((double)step/this.possibilities.size())*100), "%");
         String valid = cmdPing.cmdPing(this.getFromBinary(StringUtils.join(ArrayUtils.toObject(value), "")));
-        System.out.println(valid);
         if (valid != null) {
             data.add(valid);
         }
+
+    }
+
+    private void genBinaryOptions(int count, int[] array, int v) {
+        if (v == count)
+        {
+            this.possibilities.add(StringUtils.join(ArrayUtils.toObject(array), ""));
+            return;
+        }
+        array[v] = 0;
+        this.genBinaryOptions(count, array, v + 1);
+        array[v] = 1;
+        this.genBinaryOptions(count, array, v + 1);
 
     }
 

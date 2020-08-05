@@ -15,7 +15,6 @@ public class Main {
         System.out.println("---------------------");
 
         NetworkManager nm = new NetworkManager(localhost.getIpAddress(), localhost.getPrefix());
-        nm.pingSweep(runner);
         for (String item : nm.pingSweep(runner)) {
             System.out.println(item);
         }
