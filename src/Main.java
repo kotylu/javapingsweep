@@ -1,8 +1,10 @@
+import java.net.InetAddress;
+
 public class Main {
     public static void main(String[] args) {
         System.out.println("starting...");
 
-        Localhost localhost = new Localhost();
+        Host localhost = Host.getLocalhost();
         System.out.println(localhost.getHostname());
         System.out.println(Integer.toBinaryString(localhost.getIpAddress()[0]));
         System.out.println(localhost.getPrefix());
