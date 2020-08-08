@@ -42,7 +42,6 @@ public class NetworkManager {
             i++;
         }
 
-        this.lives = result;
         return this.lives;
     }
 
