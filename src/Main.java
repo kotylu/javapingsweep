@@ -1,5 +1,3 @@
-import java.net.InetAddress;
-
 public class Main {
     public static void main(String[] args) {
         System.out.println("starting...");
@@ -17,9 +15,11 @@ public class Main {
         System.out.println("---------------------");
 
         NetworkManager nm = new NetworkManager(localhost.getIpAddress(), localhost.getPrefix());
-        for (String item : nm.pingSweep(runner)) {
+        nm.loadLiveDevices(runner);
+        for (String item : nm.getLiveDev()) {
             System.out.println(item);
         }
+
         System.out.println("---------------------");
 
         System.out.println("ending...");

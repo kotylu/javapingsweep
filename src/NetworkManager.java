@@ -1,53 +1,59 @@
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 import java.util.ArrayList;
-import java.util.concurrent.CompletableFuture;
 
 
 public class NetworkManager {
     private final String networkAddress;
     private final int prefix;
     private final ArrayList<String> possibilities;
+    private ArrayList<String> lives;
+    private IPing cmdPing;
 
-    public NetworkManager(int[] localhost, int prefix) {
+    public NetworkManager(int[] host, int prefix) {
         this.possibilities = new ArrayList<>();
+        this.lives = new ArrayList<>();
         this.prefix = prefix;
-        String binary = String.join("", toBinaryOktet(localhost[0]),
-                                                toBinaryOktet(localhost[1]),
-                                                toBinaryOktet(localhost[2]),
-                                                toBinaryOktet(localhost[3]));
+        String binary = String.join("", toBinaryOktet(host[0]),
+                                                toBinaryOktet(host[1]),
+                                                toBinaryOktet(host[2]),
+                                                toBinaryOktet(host[3]));
         this.networkAddress = StringUtils.rightPad(binary.substring(0, prefix), 32, "0");
     }
 
-    public ArrayList<String> pingSweep(IPing cmdPing) {
+    public ArrayList<String> getLiveDev() {
+        if (this.lives.isEmpty())
+            this.loadLiveDevices(this.cmdPing);
+        return this.lives;
+    }
+
+    public ArrayList<String> loadLiveDevices(IPing cmdPing) {
+        this.cmdPing = cmdPing;
         ArrayList<String> result = new ArrayList<>();
-        CompletableFuture<Void> cf = new CompletableFuture<>();
-        this.genBinaryOptions(32-this.prefix, new int[32-this.prefix], 0);
+        if (this.possibilities.isEmpty())
+            this.genBinaryOptions(32-this.prefix, new int[32-this.prefix], 0);
 
         //TODO status bar
         //TODO make it run async without getting my mac into space
         int i = 1;
         for (String item : this.possibilities) {
             int info = i;
-//                cf = CompletableFuture.runAsync(() -> {
                     this.validate(cmdPing, result, String.format("%s%s", this.networkAddress.substring(0, this.prefix), item).toCharArray(), info);
-//                });
             i++;
         }
 
-//        while (!CompletableFuture.allOf(cf).isDone()) {
-//        }
-            return result;
+        this.lives = result;
+        return this.lives;
     }
 
     private void validate(IPing cmdPing, ArrayList<String> data, char[] value, int step) {
         //TODO debugger: be able to see all of them - System.out.println(StringUtils.join(ArrayUtils.toObject(value), ""));
-//        System.out.println(this.getFromBinary(StringUtils.join(ArrayUtils.toObject(value), "")));
+        //System.out.println(this.getFromBinary(StringUtils.join(ArrayUtils.toObject(value), "")));
 
         System.out.printf("%g%s%n",(((double)step/this.possibilities.size())*100), "%");
         String valid = cmdPing.cmdPing(this.getFromBinary(StringUtils.join(ArrayUtils.toObject(value), "")));
         if (valid != null) {
-            data.add(valid);
+            this.lives.add(valid);
         }
 
     }

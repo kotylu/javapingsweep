@@ -8,9 +8,9 @@ import java.util.regex.Pattern;
 public class Host {
     private InetAddress host;
     private NetworkInterface nInterface;
-    public Host(byte[] address) {
+    public Host(String address) {
         try {
-            this.host = InetAddress.getByAddress(address);
+            this.host = InetAddress.getByName(address);
             this.nInterface = NetworkInterface.getByInetAddress(this.host);
         }
         catch (Exception e) {
@@ -19,15 +19,16 @@ public class Host {
     }
 
     public static Host getLocalhost() {
-        byte[] addr = new byte[0];
+        String result = "";
         try {
-            addr = InetAddress.getLocalHost().getAddress();
+            result = InetAddress.getLocalHost().getHostAddress();
         }
         catch (Exception e) {
             System.err.println(e.getMessage());
         }
-        return new Host(addr);
+        return new Host(result);
     }
+
     public String getHostname() {
         return this.host.getHostName();
     }
@@ -59,11 +60,5 @@ public class Host {
                 prefix[0] = item.getNetworkPrefixLength();
             });
         return prefix[0];
-    }
-}
-
-class UnknownInterfaceException extends RuntimeException {
-    public UnknownInterfaceException() {
-        super("Interface wasn't recognised");
     }
 }
