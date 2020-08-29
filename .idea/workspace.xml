@@ -25,16 +25,7 @@
     </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3eeb719e-65f8-472f-9c98-778e2d7851d8" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/out/production/java_ping_sweep/CLI.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/java_ping_sweep/NetworkManager$1.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/CLI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/java_ping_sweep/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/java_ping_sweep/Main.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/java_ping_sweep/NetworkManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/java_ping_sweep/NetworkManager.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/NetworkManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/NetworkManager.java" afterDir="false" />
-    </list>
+    <list default="true" id="3eeb719e-65f8-472f-9c98-778e2d7851d8" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -70,6 +61,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="com.intellij.ide.scratch.LRUPopupBuilder$1/New Scratch File" value="JAVA" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="project.structure.last.edited" value="Libraries" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />

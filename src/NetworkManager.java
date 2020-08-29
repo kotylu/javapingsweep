@@ -8,7 +8,7 @@ public class NetworkManager {
     private final int prefix;
     private final ArrayList<String> possibilities;
     private ArrayList<String> lives;
-    private IPing cmdPing;
+    private ICmd cmdPing;
 
     public NetworkManager(int[] host, int prefix) {
         this.possibilities = new ArrayList<>();
@@ -27,7 +27,7 @@ public class NetworkManager {
         return this.lives;
     }
 
-    public ArrayList<String> loadLiveDevices(IPing cmdPing) {
+    public ArrayList<String> loadLiveDevices(ICmd cmdPing) {
         this.cmdPing = cmdPing;
         if (this.possibilities.isEmpty())
             this.genBinaryOptions(32-this.prefix, new int[32-this.prefix], 0);
@@ -44,7 +44,7 @@ public class NetworkManager {
         return this.lives;
     }
 
-    private void validate(IPing cmdPing, char[] value, int step) {
+    private void validate(ICmd cmdPing, char[] value, int step) {
         //TODO debugger: be able to see all of them - System.out.println(StringUtils.join(ArrayUtils.toObject(value), ""));
         //System.out.println(this.getFromBinary(StringUtils.join(ArrayUtils.toObject(value), "")));
 

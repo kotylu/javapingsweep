@@ -11,6 +11,7 @@ public class Main {
 
         CmdRunner runner = new CmdRunner();
         System.out.println(runner.cmdPing(localhost.getIpAddressAsString()));
+        System.out.println(runner.cmdNmap(localhost.getIpAddressAsString()));
 
         System.out.println("---------------------");
 
