@@ -25,7 +25,12 @@
     </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3eeb719e-65f8-472f-9c98-778e2d7851d8" name="Default Changelist" comment="" />
+    <list default="true" id="3eeb719e-65f8-472f-9c98-778e2d7851d8" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/python_api/network.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/python_api/test.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/python_api/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/python_api/main.py" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -198,18 +203,20 @@
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="736" y="249" key="RollbackChangesDialog/0.0.1920.1080@0.0.1920.1080" timestamp="1596571927817" />
-    <state x="229" y="79" key="SettingsEditor" timestamp="1596585126199">
-      <screen x="0" y="0" width="1920" height="1080" />
+    <state x="229" y="76" key="SettingsEditor" timestamp="1600082472439">
+      <screen x="0" y="0" width="1920" height="1040" />
     </state>
+    <state x="229" y="76" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1600082472439" />
     <state x="229" y="79" key="SettingsEditor/0.0.1920.1080@0.0.1920.1080" timestamp="1596585126199" />
     <state x="229" y="100" key="SettingsEditor/0.23.1920.1057@0.23.1920.1057" timestamp="1596570203507" />
     <state x="773" y="461" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1596591352837">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="773" y="461" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1920.1080@0.0.1920.1080" timestamp="1596591352837" />
-    <state x="385" y="204" width="670" height="676" key="search.everywhere.popup" timestamp="1596586621950">
-      <screen x="0" y="0" width="1920" height="1080" />
+    <state x="385" y="196" width="672" height="651" key="search.everywhere.popup" timestamp="1600083386850">
+      <screen x="0" y="0" width="1920" height="1040" />
     </state>
+    <state x="385" y="196" width="672" height="651" key="search.everywhere.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1600083386850" />
     <state x="385" y="204" width="670" height="676" key="search.everywhere.popup/0.0.1920.1080@0.0.1920.1080" timestamp="1596586621950" />
     <state x="385" y="223" key="search.everywhere.popup/0.23.1920.1057@0.23.1920.1057" timestamp="1596569892622" />
   </component>
