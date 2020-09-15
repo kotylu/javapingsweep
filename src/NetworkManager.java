@@ -4,20 +4,18 @@ import java.util.ArrayList;
 
 
 public class NetworkManager {
-    private final String networkAddress;
-    private final int prefix;
-    private final ArrayList<String> possibilities;
+    private String networkAddress;
+    private int prefix;
     private ArrayList<String> lives;
     private ICmd cmdPing;
 
     public NetworkManager(int[] host, int prefix) {
-        this.possibilities = new ArrayList<>();
-        this.lives = new ArrayList<>();
+        this.lives = new ArrayList<String>();
         this.prefix = prefix;
-        String binary = String.join("", toBinaryOktet(host[0]),
-                                                toBinaryOktet(host[1]),
-                                                toBinaryOktet(host[2]),
-                                                toBinaryOktet(host[3]));
+        String binary = String.join("", getBinaryOktet(host[0]),
+                                                getBinaryOktet(host[1]),
+                                                getBinaryOktet(host[2]),
+                                                getBinaryOktet(host[3]));
         this.networkAddress = StringUtils.rightPad(binary.substring(0, prefix), 32, "0");
     }
 
@@ -28,48 +26,38 @@ public class NetworkManager {
     }
 
     public ArrayList<String> loadLiveDevices(ICmd cmdPing) {
+        ArrayList<String> possibilities = new ArrayList<String>();
         this.cmdPing = cmdPing;
-        if (this.possibilities.isEmpty())
-            this.genBinaryOptions(32-this.prefix, new int[32-this.prefix], 0);
+        this.genBinaryOptions(32-this.prefix, new int[32-this.prefix], 0, possibilities);
 
         //TODO status bar
-        //TODO make it run async without getting my mac into space
-        int i = 1;
-        for (String item : this.possibilities) {
-            int info = i;
-                    this.validate(cmdPing, String.format("%s%s", this.networkAddress.substring(0, this.prefix), item).toCharArray(), info);
-            i++;
+        for (int i = 0; i < possibilities.size(); i++) {
+            String address = String.format("%s%s", this.networkAddress.substring(0, this.prefix), possibilities.get(i));
+            //wtf shouldnt be 1 considered as true already???????????????????
+            if (cmdPing.ping(address) == 1) {
+                this.lives.add(address);
+            }
         }
-
         return this.lives;
     }
 
-    private void validate(ICmd cmdPing, char[] value, int step) {
-        //TODO debugger: be able to see all of them - System.out.println(StringUtils.join(ArrayUtils.toObject(value), ""));
-        //System.out.println(this.getFromBinary(StringUtils.join(ArrayUtils.toObject(value), "")));
-
-        System.out.printf("%g%s%n",(((double)step/this.possibilities.size())*100), "%");
-        String valid = cmdPing.cmdPing(this.getFromBinary(StringUtils.join(ArrayUtils.toObject(value), "")));
-        if (valid != null) {
-            this.lives.add(valid);
-        }
-
-    }
-
-    private void genBinaryOptions(int count, int[] array, int v) {
+    private ArrayList<String> genBinaryOptions(int count, int[] array, int v, ArrayList<String> out) {
+        if (out == null)
+            out = new ArrayList<String>();
         if (v == count)
         {
-            this.possibilities.add(StringUtils.join(ArrayUtils.toObject(array), ""));
-            return;
+            out.add(StringUtils.join(ArrayUtils.toObject(array), ""));
         }
-        array[v] = 0;
-        this.genBinaryOptions(count, array, v + 1);
-        array[v] = 1;
-        this.genBinaryOptions(count, array, v + 1);
 
+        array[v] = 0;
+        this.genBinaryOptions(count, array, v + 1, out);
+        array[v] = 1;
+        this.genBinaryOptions(count, array, v + 1, out);
+
+        return out;
     }
 
-    private String toBinaryOktet(int value) {
+    private String getBinaryOktet(int value) {
         return StringUtils.leftPad(Integer.toBinaryString(value), 8, "0");
     }
 

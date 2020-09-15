@@ -8,5 +8,27 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="commons-lang3-3.11-javadoc" level="project" />
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="jar://C:/Program Files/Java/jdk-14.0.2/commons-lang3-3.11.jar!/" />
+        </CLASSES>
+        <JAVADOC>
+          <root url="jar://C:/Program Files/Java/jdk-14.0.2/commons-lang3-3.11-javadoc.jar!/" />
+        </JAVADOC>
+        <SOURCES>
+          <root url="jar://C:/Program Files/Java/jdk-14.0.2/commons-lang3-3.11-sources.jar!/" />
+        </SOURCES>
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" exported="">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/../../commons-lang3-3.11/commons-lang3-3.11.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
   </component>
 </module>
